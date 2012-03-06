@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE url-logger SYSTEM "chrome://url-logger/locale/translations.dtd">
+<prefwindow 
+     title="&options.title;"
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<prefpane label="&options.title;">
+		<preferences>
+            <preference id="url-logger-logactive" name="extensions.url-logger.logactive" type="bool"/>
+            <preference id="url-logger-activepath" name="extensions.url-logger.activepath" type="string"/>
+            <preference id="url-logger-logall" name="extensions.url-logger.logall" type="bool"/>
+            <preference id="url-logger-logpath" name="extensions.url-logger.logpath" type="string"/>
+            <preference id="url-logger-logtabs" name="extensions.url-logger.logtabs" type="bool"/>
+            <preference id="url-logger-tabspath" name="extensions.url-logger.tabspath" type="string"/>
+		</preferences>
+
+          <script type="application/x-javascript"><![CDATA[
+              function selectFile(who) {
+                  var filePicker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+                  //TODO: Localize "Choose a file". How to eval entity inside CDATA?
+                  filePicker.init(window, "Choose a file.", filePicker.modeOpen);
+                  if (filePicker.show() == filePicker.returnOK) {
+                      var tbox = document.getElementById(who);
+                      if(tbox)
+                      {
+                          if(filePicker.file.exists()) {
+                              params = {return:null};
+                              window.openDialog("chrome://url-logger/content/fileexistsdia.xul", "", "chrome, dialog, modal, resizable=yes", params).focus();
+                              if (!params.return) {
+                                 return;
+                              }
+                          }
+                          tbox.value = filePicker.file.path;
+                          prefs = Components.classes["@mozilla.org/preferences-service;1"]
+                                 .getService(Components.interfaces.nsIPrefService)
+                                 .getBranch("extensions.url-logger.");
+                          prefs.setComplexValue(who, Components.interfaces.nsILocalFile, filePicker.file.QueryInterface(Components.interfaces.nsILocalFile));
+                     }
+                  }
+              }
+          ]]></script>
+
+		<groupbox>
+			<caption label="&options.settings;"/>
+			<grid>
+				<columns>
+					<column flex="0"/>
+					<column flex="1"/>
+					<column flex="0"/>
+				</columns>
+				<rows>
+					<row>
+						<label control="" value=""/>
+						<label control="" value="&options.pathtologfile;"/>
+						<label control="" value=""/>
+					</row>
+					<row>
+						<checkbox id="logall" label="&options.logallurls;" preference="url-logger-logall"/>
+						<textbox id="logpath" preference="url-logger-logpath" readonly="true"/>
+                        <button label="&options.browse;" oncommand="selectFile('logpath');" />
+					</row>
+					<row>
+						<checkbox id="logactive" label="&options.logactive;" preference="url-logger-logactive"/>
+						<textbox id="activepath" preference="url-logger-activepath" readonly="true"/>
+                        <button label="&options.browse;" oncommand="selectFile('activepath');" />
+					</row>
+					<row>
+						<checkbox id="logtabs" label="&options.logtabs;" preference="url-logger-logtabs"/>
+						<textbox id="tabspath" preference="url-logger-tabspath" readonly="true"/>
+                        <button label="&options.browse;" oncommand="selectFile('tabspath');" />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+	</prefpane>
+</prefwindow>
