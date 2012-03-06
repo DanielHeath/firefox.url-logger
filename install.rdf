@@ -4,7 +4,7 @@
 
     <Description about="urn:mozilla:install-manifest">
         <em:id>url-logger@gnutiken.se</em:id>
-        <em:version>1.0</em:version>
+        <em:version>1.0.1</em:version>
         <em:type>2</em:type>
 
         <em:name>URL Logger</em:name>
@@ -18,8 +18,8 @@
         <em:targetApplication>
             <Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-                <em:minVersion>9.0</em:minVersion>
-                <em:maxVersion>12.0a1</em:maxVersion>
+                <em:minVersion>4.0</em:minVersion>
+                <em:maxVersion>12.*</em:maxVersion>
             </Description>
         </em:targetApplication>
     </Description>

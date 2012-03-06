@@ -245,8 +245,8 @@ urlLoggerChrome.tabRemoved = function (ev)
 
 urlLoggerChrome.getTabURLs = function ()
 {
-    gBrowser = window.getBrowser();
-    tabs = gBrowser.browsers;
+    browser = window.getBrowser();
+    tabs = browser.browsers;
     urls = [];
 
     for (var i = 0; i < tabs.length; i++)

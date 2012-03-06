@@ -15,11 +15,11 @@
             <preference id="url-logger-tabspath" name="extensions.url-logger.tabspath" type="string"/>
 		</preferences>
 
+          <script type="application/x-javascript">var choosefile="&options.choosefile;"</script>
           <script type="application/x-javascript"><![CDATA[
               function selectFile(who) {
                   var filePicker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
-                  //TODO: Localize "Choose a file". How to eval entity inside CDATA?
-                  filePicker.init(window, "Choose a file.", filePicker.modeOpen);
+                  filePicker.init(window, choosefile, filePicker.modeOpen);
                   if (filePicker.show() == filePicker.returnOK) {
                       var tbox = document.getElementById(who);
                       if(tbox)
