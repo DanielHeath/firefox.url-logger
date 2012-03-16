@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <!DOCTYPE url-logger SYSTEM "chrome://url-logger/locale/translations.dtd">
-<prefwindow 
+<prefwindow
      title="&options.title;"
      xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
@@ -19,18 +19,12 @@
           <script type="application/x-javascript"><![CDATA[
               function selectFile(who) {
                   var filePicker = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
-                  filePicker.init(window, choosefile, filePicker.modeOpen);
-                  if (filePicker.show() == filePicker.returnOK) {
+                  filePicker.init(window, choosefile, filePicker.modeSave);
+                  var ret = filePicker.show()
+                  if (ret == filePicker.returnOK || ret == filePicker.returnReplace) {
                       var tbox = document.getElementById(who);
                       if(tbox)
                       {
-                          if(filePicker.file.exists()) {
-                              params = {return:null};
-                              window.openDialog("chrome://url-logger/content/fileexistsdia.xul", "", "chrome, dialog, modal, resizable=yes", params).focus();
-                              if (!params.return) {
-                                 return;
-                              }
-                          }
                           tbox.value = filePicker.file.path;
                           prefs = Components.classes["@mozilla.org/preferences-service;1"]
                                  .getService(Components.interfaces.nsIPrefService)

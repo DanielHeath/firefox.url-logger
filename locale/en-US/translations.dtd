@@ -1,1 +1,12 @@
-<!ENTITY toolbar.showoptions "Show URL Logger options"><!ENTITY options.choosefile "Choose a file"><!ENTITY options.title "URL Logger Preferences"><!ENTITY options.settings "Settings"><!ENTITY options.pathtologfile "Path to logfile"><!ENTITY options.enabled "Enabled"><!ENTITY options.logallurls "Log all URLs"><!ENTITY options.logactive "Log active tab URL"><!ENTITY options.logtabs "Log all tab URLs"><!ENTITY options.browse "Browse..."><!ENTITY fileexistsdia.fileexists "File exists."><!ENTITY fileexistsdia.overwrite "Overwrite?">
+<!ENTITY toolbar.showoptions "Show URL Logger options">
+<!ENTITY options.choosefile "Choose a file">
+<!ENTITY options.title "URL Logger Preferences">
+<!ENTITY options.settings "Settings">
+<!ENTITY options.pathtologfile "Path to logfile">
+<!ENTITY options.enabled "Enabled">
+<!ENTITY options.logallurls "Log all URLs">
+<!ENTITY options.logactive "Log active tab URL">
+<!ENTITY options.logtabs "Log all tab URLs">
+<!ENTITY options.browse "Browse...">
+<!ENTITY fileexistsdia.fileexists "File exists.">
+<!ENTITY fileexistsdia.overwrite "Overwrite?">

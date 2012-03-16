@@ -8,16 +8,6 @@ if (typeof(urlLoggerChrome) == "undefined") {
     var urlLoggerChrome = {};
 }
 
-// I/O Open flags
-var PR_RDONLY  =     0x01
-var PR_WRONLY  =     0x02
-var PR_RDWR    =     0x04
-var PR_CREATE_FILE = 0x08
-var PR_APPEND  =     0x10
-var PR_TRUNCATE=     0x20
-var PR_SYNC    =     0x40
-var PR_EXCL    =     0x80
-
 /* vars */
 urlLoggerChrome.logactive;
 urlLoggerChrome.activepath;
@@ -204,12 +194,22 @@ urlLoggerChrome.logActive = function (url)
     }
 }
 
+/* I/O Open flags
+PR_RDONLY  =     0x01
+PR_WRONLY  =     0x02
+PR_RDWR    =     0x04
+PR_CREATE_FILE = 0x08
+PR_APPEND  =     0x10
+PR_TRUNCATE=     0x20
+PR_SYNC    =     0x40
+PR_EXCL    =     0x80
+*/
 urlLoggerChrome.logAll = function (url)
 {
     if(urlLoggerChrome.logall)
     {
         var stream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
-        stream.init(urlLoggerChrome.logpath, PR_WRONLY | PR_CREATE_FILE | PR_APPEND, 0666, 0);
+        stream.init(urlLoggerChrome.logpath, 0x02 | 0x08 | 0x10, 0666, 0);
 
         stream.write(url, url.length);
         stream.write("\n", 1);
@@ -222,7 +222,7 @@ urlLoggerChrome.logTabs = function (excludelist)
     if(urlLoggerChrome.logtabs)
     {
         var stream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
-        stream.init(urlLoggerChrome.tabspath, PR_WRONLY | PR_CREATE_FILE | PR_TRUNCATE, 0666, 0);
+        stream.init(urlLoggerChrome.tabspath, 0x02 | 0x08 | 0x20, 0666, 0);
 
         urls = urlLoggerChrome.getTabURLs();
         for(var i = 0; i < urls.length; i++)
